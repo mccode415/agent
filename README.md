@@ -2,35 +2,83 @@
 
 Custom agent prompts for Claude Code and similar AI coding assistants.
 
+## Quick Start
+
+```bash
+git clone https://github.com/mccode415/agent.git
+```
+
 ## Agents
 
 ### Core Workflow
-- **[staff-engineer.md](prompts/staff-engineer.md)** - Full-lifecycle engineering agent (plan, implement, validate)
-- **[deep-research.md](prompts/deep-research.md)** - Codebase and external research before planning
-- **[system-architect.md](prompts/system-architect.md)** - Impact analysis and architecture decisions
+| Agent | Purpose |
+|-------|--------|
+| [staff-engineer](prompts/staff-engineer.md) | Full-lifecycle engineering (v2 with triage, rollback, incremental commits) |
+| [agent-orchestrator](prompts/agent-orchestrator.md) | Multi-agent workflow coordinator |
+| [deep-research](prompts/deep-research.md) | Codebase and external research before planning |
+| [system-architect](prompts/system-architect.md) | Impact analysis and architecture decisions |
 
 ### Validation & Quality
-- **[security-fortress.md](prompts/security-fortress.md)** - Comprehensive security analysis
-- **[change-validator-linter.md](prompts/change-validator-linter.md)** - Code quality and linting
-- **[change-verifier.md](prompts/change-verifier.md)** - Design alignment and use case verification
-- **[performance-analyzer.md](prompts/performance-analyzer.md)** - Performance bottleneck detection
-- **[dependency-auditor.md](prompts/dependency-auditor.md)** - Security, updates, and license compliance
+| Agent | Purpose |
+|-------|--------|
+| [security-fortress](prompts/security-fortress.md) | Comprehensive security analysis (OWASP, infra, financial) |
+| [change-validator-linter](prompts/change-validator-linter.md) | Code quality and linting |
+| [change-verifier](prompts/change-verifier.md) | Design alignment and use case verification |
+| [performance-analyzer](prompts/performance-analyzer.md) | Performance bottleneck detection |
+| [dependency-auditor](prompts/dependency-auditor.md) | Security, updates, and license compliance |
 
 ### Development
-- **[test-generator.md](prompts/test-generator.md)** - Comprehensive test generation
-- **[docs-generator.md](prompts/docs-generator.md)** - API and code documentation
-- **[api-designer.md](prompts/api-designer.md)** - REST API design and review
-- **[refactor-assistant.md](prompts/refactor-assistant.md)** - Code improvement and cleanup
+| Agent | Purpose |
+|-------|--------|
+| [test-generator](prompts/test-generator.md) | Comprehensive test generation |
+| [docs-generator](prompts/docs-generator.md) | API and code documentation |
+| [api-designer](prompts/api-designer.md) | REST API design and review |
+| [refactor-assistant](prompts/refactor-assistant.md) | Code improvement and cleanup |
 
 ### Exploration
-- **[codebase-explorer.md](prompts/codebase-explorer.md)** - Map unfamiliar codebases
-- **[plan-visualizer.md](prompts/plan-visualizer.md)** - Create visual plan summaries
+| Agent | Purpose |
+|-------|--------|
+| [codebase-explorer](prompts/codebase-explorer.md) | Map unfamiliar codebases |
+| [plan-visualizer](prompts/plan-visualizer.md) | Create visual plan summaries |
 
 ### Specialized
-- **[quant-trading-engineer.md](prompts/quant-trading-engineer.md)** - Trading systems and backtesting
+| Agent | Purpose |
+|-------|--------|
+| [quant-trading-engineer](prompts/quant-trading-engineer.md) | Trading systems and backtesting |
+
+## Skills (Commands)
+
+Quick commands invoked with `/command` syntax.
+
+| Skill | Trigger | Purpose |
+|-------|---------|--------|
+| [commit](prompts/skills/commit.md) | `/commit` | Create well-formatted git commit |
+| [review-pr](prompts/skills/review-pr.md) | `/review-pr` | Review a pull request |
+| [create-pr](prompts/skills/create-pr.md) | `/create-pr` | Create a pull request |
+| [test](prompts/skills/test.md) | `/test` | Run and analyze tests |
+| [lint](prompts/skills/lint.md) | `/lint` | Run linters and fix issues |
+| [explain](prompts/skills/explain.md) | `/explain` | Explain code or concepts |
+| [debug](prompts/skills/debug.md) | `/debug` | Debug an issue |
+| [refactor](prompts/skills/refactor.md) | `/refactor` | Refactor code |
+
+## Orchestration Workflows
+
+Trigger multi-agent workflows with keywords:
+
+| Keyword | Agents Run |
+|---------|------------|
+| `full-review` | security-fortress + change-validator + change-verifier + performance-analyzer |
+| `pre-deploy` | security-fortress + dependency-auditor + system-architect + test-generator |
+| `new-feature` | codebase-explorer + system-architect + api-designer |
+| `security-audit` | security-fortress + security-reviewer + dependency-auditor |
+| `code-quality` | change-validator + change-verifier + refactor-assistant + test-generator |
+| `documentation` | docs-generator + api-designer + codebase-explorer |
+| `deep-analysis` | system-architect + codebase-explorer + performance-analyzer + security-fortress |
+| `staff-engineer` | Full lifecycle with research, planning, implementation, validation |
 
 ## Quick Reference
-- **[quick-reference.md](prompts/quick-reference.md)** - Staff engineer cheat sheet
+
+- [staff-engineer-quick-ref](prompts/quick-reference.md) - Cheat sheet for staff-engineer workflow
 
 ## Usage
 
@@ -47,10 +95,42 @@ These prompts can be used as:
 - **Incremental**: Commit working increments, validate early
 - **Selective**: Only run relevant validators
 
-## Contributing
+## Repository Structure
 
-To add or improve agents:
-1. Follow the existing format
-2. Include "When to Use" section
-3. Provide concrete output templates
-4. Add to this README
+```
+agent/
+├── README.md
+└── prompts/
+    ├── staff-engineer.md        # Core agent (v2)
+    ├── agent-orchestrator.md    # Multi-agent coordinator
+    ├── quick-reference.md       # Cheat sheet
+    │
+    ├── deep-research.md
+    ├── system-architect.md
+    ├── codebase-explorer.md
+    ├── plan-visualizer.md
+    │
+    ├── security-fortress.md
+    ├── change-validator-linter.md
+    ├── change-verifier.md
+    ├── performance-analyzer.md
+    ├── dependency-auditor.md
+    │
+    ├── test-generator.md
+    ├── docs-generator.md
+    ├── api-designer.md
+    ├── refactor-assistant.md
+    │
+    ├── quant-trading-engineer.md
+    │
+    └── skills/
+        ├── README.md
+        ├── commit.md
+        ├── review-pr.md
+        ├── create-pr.md
+        ├── test.md
+        ├── lint.md
+        ├── explain.md
+        ├── debug.md
+        └── refactor.md
+```
