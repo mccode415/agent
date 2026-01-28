@@ -1,6 +1,6 @@
 # Agent Prompts
 
-Custom agent prompts for Claude Code and similar AI coding assistants.
+A comprehensive collection of AI agent prompts for software engineering workflows.
 
 ## Quick Start
 
@@ -8,13 +8,14 @@ Custom agent prompts for Claude Code and similar AI coding assistants.
 git clone https://github.com/mccode415/agent.git
 ```
 
-## Agents
+## Agents Overview
 
 ### Core Workflow
 | Agent | Purpose |
 |-------|--------|
 | [staff-engineer](prompts/staff-engineer.md) | Full-lifecycle engineering (v2 with triage, rollback, incremental commits) |
 | [agent-orchestrator](prompts/agent-orchestrator.md) | Multi-agent workflow coordinator |
+| [handoff-protocol](prompts/handoff-protocol.md) | Agent-to-agent communication standard |
 | [deep-research](prompts/deep-research.md) | Codebase and external research before planning |
 | [system-architect](prompts/system-architect.md) | Impact analysis and architecture decisions |
 
@@ -41,9 +42,18 @@ git clone https://github.com/mccode415/agent.git
 | [codebase-explorer](prompts/codebase-explorer.md) | Map unfamiliar codebases |
 | [plan-visualizer](prompts/plan-visualizer.md) | Create visual plan summaries |
 
-### Specialized
+### Domain Specialists
 | Agent | Purpose |
 |-------|--------|
+| [electron-specialist](prompts/domain/electron-specialist.md) | Electron desktop app development |
+| [llm-specialist](prompts/domain/llm-specialist.md) | LLM integration, prompts, production patterns |
+| [rag-specialist](prompts/domain/rag-specialist.md) | Retrieval-augmented generation systems |
+| [database-specialist](prompts/domain/database-specialist.md) | Schema design, queries, migrations, optimization |
+| [frontend-specialist](prompts/domain/frontend-specialist.md) | React, CSS, performance, accessibility |
+| [devops-specialist](prompts/domain/devops-specialist.md) | CI/CD, Docker, Kubernetes, infrastructure |
+| [api-integration-specialist](prompts/domain/api-integration-specialist.md) | Third-party APIs, OAuth, webhooks |
+| [realtime-specialist](prompts/domain/realtime-specialist.md) | WebSockets, SSE, presence systems |
+| [search-specialist](prompts/domain/search-specialist.md) | Full-text, vector, and hybrid search |
 | [quant-trading-engineer](prompts/quant-trading-engineer.md) | Trading systems and backtesting |
 
 ## Skills (Commands)
@@ -70,30 +80,11 @@ Trigger multi-agent workflows with keywords:
 | `full-review` | security-fortress + change-validator + change-verifier + performance-analyzer |
 | `pre-deploy` | security-fortress + dependency-auditor + system-architect + test-generator |
 | `new-feature` | codebase-explorer + system-architect + api-designer |
-| `security-audit` | security-fortress + security-reviewer + dependency-auditor |
+| `security-audit` | security-fortress + dependency-auditor |
 | `code-quality` | change-validator + change-verifier + refactor-assistant + test-generator |
 | `documentation` | docs-generator + api-designer + codebase-explorer |
 | `deep-analysis` | system-architect + codebase-explorer + performance-analyzer + security-fortress |
 | `staff-engineer` | Full lifecycle with research, planning, implementation, validation |
-
-## Quick Reference
-
-- [staff-engineer-quick-ref](prompts/quick-reference.md) - Cheat sheet for staff-engineer workflow
-
-## Usage
-
-These prompts can be used as:
-1. **System prompts** when building with Claude API
-2. **Custom agent definitions** in Claude Code (if supported)
-3. **Reference** for guiding Claude through engineering workflows
-
-## Philosophy
-
-- **Concrete over vague**: Checklists, not prose
-- **Safe by default**: Always know how to rollback
-- **Right-sized process**: Simple tasks get simple workflows
-- **Incremental**: Commit working increments, validate early
-- **Selective**: Only run relevant validators
 
 ## Repository Structure
 
@@ -101,9 +92,10 @@ These prompts can be used as:
 agent/
 ├── README.md
 └── prompts/
-    ├── staff-engineer.md        # Core agent (v2)
-    ├── agent-orchestrator.md    # Multi-agent coordinator
-    ├── quick-reference.md       # Cheat sheet
+    ├── staff-engineer.md          # Core workflow agent (v2)
+    ├── agent-orchestrator.md      # Multi-agent coordinator
+    ├── handoff-protocol.md        # Agent communication
+    ├── quick-reference.md         # Cheat sheet
     │
     ├── deep-research.md
     ├── system-architect.md
@@ -123,7 +115,18 @@ agent/
     │
     ├── quant-trading-engineer.md
     │
-    └── skills/
+    ├── domain/                    # Domain specialists
+    │   ├── electron-specialist.md
+    │   ├── llm-specialist.md
+    │   ├── rag-specialist.md
+    │   ├── database-specialist.md
+    │   ├── frontend-specialist.md
+    │   ├── devops-specialist.md
+    │   ├── api-integration-specialist.md
+    │   ├── realtime-specialist.md
+    │   └── search-specialist.md
+    │
+    └── skills/                    # Quick commands
         ├── README.md
         ├── commit.md
         ├── review-pr.md
@@ -134,3 +137,29 @@ agent/
         ├── debug.md
         └── refactor.md
 ```
+
+## Philosophy
+
+- **Concrete over vague**: Checklists, not prose
+- **Safe by default**: Always know how to rollback
+- **Right-sized process**: Simple tasks get simple workflows
+- **Incremental**: Commit working increments, validate early
+- **Selective**: Only run relevant validators
+- **Domain expertise**: Specialized knowledge for complex areas
+
+## Usage
+
+These prompts can be used as:
+1. **System prompts** when building with Claude API
+2. **Custom agent definitions** in Claude Code (if supported)
+3. **Reference** for guiding Claude through engineering workflows
+4. **Templates** for building your own agents
+
+## Contributing
+
+To add or improve agents:
+1. Follow the existing format
+2. Include "When to Use" or "Expertise Areas" section
+3. Provide concrete output templates
+4. Include review checklists
+5. Add to this README
