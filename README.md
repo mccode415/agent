@@ -23,6 +23,7 @@ git clone https://github.com/mccode415/agent.git
 | Agent | Purpose |
 |-------|--------|
 | [security-fortress](prompts/security-fortress.md) | Comprehensive security analysis (OWASP, infra, financial) |
+| [security-reviewer](prompts/security-reviewer.md) | Targeted code security review |
 | [change-validator-linter](prompts/change-validator-linter.md) | Code quality and linting |
 | [change-verifier](prompts/change-verifier.md) | Design alignment and use case verification |
 | [performance-analyzer](prompts/performance-analyzer.md) | Performance bottleneck detection |
@@ -80,10 +81,14 @@ Trigger multi-agent workflows with keywords:
 | `full-review` | security-fortress + change-validator + change-verifier + performance-analyzer |
 | `pre-deploy` | security-fortress + dependency-auditor + system-architect + test-generator |
 | `new-feature` | codebase-explorer + system-architect + api-designer |
-| `security-audit` | security-fortress + dependency-auditor |
+| `security-audit` | security-fortress + security-reviewer + dependency-auditor |
 | `code-quality` | change-validator + change-verifier + refactor-assistant + test-generator |
+| `trading-review` | quant-trading-engineer + security-fortress + performance-analyzer |
 | `documentation` | docs-generator + api-designer + codebase-explorer |
 | `deep-analysis` | system-architect + codebase-explorer + performance-analyzer + security-fortress |
+| `database-design` | database-specialist + system-architect |
+| `api-integration` | api-integration-specialist + security-reviewer |
+| `realtime-feature` | realtime-specialist + performance-analyzer |
 | `staff-engineer` | Full lifecycle with research, planning, implementation, validation |
 
 ## Repository Structure
@@ -91,6 +96,7 @@ Trigger multi-agent workflows with keywords:
 ```
 agent/
 ├── README.md
+├── AGENT_TEMPLATE.md              # Standard template for all agents
 └── prompts/
     ├── staff-engineer.md          # Core workflow agent (v2)
     ├── agent-orchestrator.md      # Multi-agent coordinator
@@ -103,6 +109,7 @@ agent/
     ├── plan-visualizer.md
     │
     ├── security-fortress.md
+    ├── security-reviewer.md
     ├── change-validator-linter.md
     ├── change-verifier.md
     ├── performance-analyzer.md
@@ -158,8 +165,9 @@ These prompts can be used as:
 ## Contributing
 
 To add or improve agents:
-1. Follow the existing format
-2. Include "When to Use" or "Expertise Areas" section
-3. Provide concrete output templates
-4. Include review checklists
-5. Add to this README
+1. Follow [AGENT_TEMPLATE.md](AGENT_TEMPLATE.md) for consistent structure
+2. Include Role/Trigger/Receives/Hands off header
+3. Define Input/Process/Output/Handoff sections
+4. Provide concrete output templates with JSON formats
+5. Include quality checklists
+6. Add to this README
