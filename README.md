@@ -78,11 +78,11 @@ Trigger multi-agent workflows with keywords:
 
 | Keyword | Agents Run |
 |---------|------------|
-| `full-review` | security-fortress + change-validator + change-verifier + performance-analyzer |
+| `full-review` | security-fortress + change-validator-linter + change-verifier + performance-analyzer |
 | `pre-deploy` | security-fortress + dependency-auditor + system-architect + test-generator |
 | `new-feature` | codebase-explorer + system-architect + api-designer |
 | `security-audit` | security-fortress + security-reviewer + dependency-auditor |
-| `code-quality` | change-validator + change-verifier + refactor-assistant + test-generator |
+| `code-quality` | change-validator-linter + change-verifier + refactor-assistant + test-generator |
 | `trading-review` | quant-trading-engineer + security-fortress + performance-analyzer |
 | `documentation` | docs-generator + api-designer + codebase-explorer |
 | `deep-analysis` | system-architect + codebase-explorer + performance-analyzer + security-fortress |
@@ -161,6 +161,14 @@ These prompts can be used as:
 2. **Custom agent definitions** in Claude Code (if supported)
 3. **Reference** for guiding Claude through engineering workflows
 4. **Templates** for building your own agents
+
+## Maintenance
+
+Run a full local audit against installed Codex skills and this prompt repo:
+
+```bash
+./scripts/audit_codex_setup.py --skills-root ~/.codex/skills --agent-root .
+```
 
 ## Contributing
 

@@ -13,6 +13,13 @@ deep-analysis    → architect + explore + perf + security
 staff-engineer   → Full lifecycle implementation
 ```
 
+## Primary Routing
+```
+Default for generic coding tasks → staff-engineer
+Legacy generic skills            → explicit user request only
+Specialized/tooling skills       → route when domain/tool clearly matches
+```
+
 ## Domain Specialist Routing
 ```
 Database task?      → database-specialist
@@ -39,6 +46,24 @@ Complex (6+ files)     → Research → Debate? → Plan → Approve → Commit 
 - [ ] [Action] in `[file:line]` → commit: `type(scope): msg`
 ```
 
+## Codex CLI Fast Path
+```bash
+# Non-interactive implementation run
+codex exec "Implement X in src/foo.ts and run targeted tests"
+
+# Non-interactive code review
+codex review --help
+
+# Enable live web research when recency matters
+codex --search
+
+# Continue prior context quickly
+codex resume --last
+
+# Apply latest generated patch to git working tree
+codex apply
+```
+
 ## Commit Protocol
 ```bash
 # Before commit: lint ✓ typecheck ✓ tests ✓
@@ -49,11 +74,11 @@ git commit -m "type(scope): description"
 
 ## Rollback Commands
 ```bash
-git reset --soft HEAD~1     # Undo commit, keep staged
-git reset HEAD~1            # Undo commit, keep unstaged
-git checkout -- .           # Discard uncommitted
-git reset --hard [hash]     # Return to commit
-git stash -m "WIP: desc"    # Save work in progress
+git reset --soft HEAD~1        # Undo last commit, keep staged
+git restore --staged [file]    # Unstage specific file
+git restore [file]             # Discard unstaged changes in one file
+git stash -m "WIP: desc"       # Save work in progress
+# Use hard reset only with explicit user approval
 ```
 
 ## Validation Matrix
@@ -121,7 +146,7 @@ New dependency   → dep audit + security
 | change-verifier | Change verification |
 
 ## Key Rules
-1. Never implement without plan approval
+1. Require plan approval for complex/high-risk tasks
 2. Never skip validation
 3. Commit only when tests pass
 4. Always know how to rollback

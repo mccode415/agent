@@ -294,7 +294,7 @@ If receiving agent can't complete:
 1. **Route handoffs** - Direct to correct agent
 2. **Track state** - Know what each agent has done
 3. **Handle failures** - Re-route or escalate
-4. **Aggregate results** - Combine outputs from parallel agents
+4. **Aggregate results** - Combine outputs from all contributing agents
 5. **Report to user** - Summarize multi-agent workflow
 
 ```
